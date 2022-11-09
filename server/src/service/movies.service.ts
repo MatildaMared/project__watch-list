@@ -1,9 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { CreateMovieDto } from 'src/dto/create-movie.dto';
+import { UpdateMovieDto } from 'src/dto/update-movie.dto';
 import { Movie } from 'src/interface/movie.interface';
 
 @Injectable()
 export class MoviesService {
-  private movies: Movie[] = [];
+  private movies: Movie[] = [
+    {
+      id: '1',
+      title: 'The Shawshank Redemption',
+      releaseYear: 1994,
+      genres: ['Drama'],
+    },
+    {
+      id: '2',
+      title: 'The Godfather',
+      releaseYear: 1972,
+      genres: ['Crime', 'Drama'],
+    },
+  ];
 
   getAll(): Movie[] {
     return this.movies;
@@ -18,10 +33,21 @@ export class MoviesService {
     return true;
   }
 
-  create(movieData) {
-    this.movies.push({
-      id: (this.movies.length + 1).toString(),
+  create(movieData: CreateMovieDto) {
+    const newMovie = {
+      id: Math.random().toString(),
       ...movieData,
-    });
+    };
+
+    this.movies.push(newMovie);
+    return newMovie;
+  }
+
+  update(id: string, updateData: UpdateMovieDto) {
+    const movie = this.getOne(id);
+    this.deleteOne(id);
+    const updatedMovie = { ...movie, ...updateData };
+    this.movies.push(updatedMovie);
+    return updatedMovie;
   }
 }
