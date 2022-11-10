@@ -7,10 +7,10 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { Movie } from 'src/interface/movie.interface';
-import { CreateMovieDto } from 'src/dto/create-movie.dto';
-import { UpdateMovieDto } from 'src/dto/update-movie.dto';
-import { MoviesService } from 'src/service/movies.service';
+import { Movie } from 'src/movies/interfaces/movie.interface';
+import { CreateMovieDto } from 'src/movies/dto/create-movie.dto';
+import { UpdateMovieDto } from 'src/movies/dto/update-movie.dto';
+import { MoviesService } from 'src/movies/movies.service';
 
 @Controller('/users/:userId/movies')
 export class MoviesController {
