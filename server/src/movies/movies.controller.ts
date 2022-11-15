@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { Movie } from 'src/movies/interfaces/movie.interface';
+import { Movie } from './entities/movie.interface';
 import { CreateMovieDto } from 'src/movies/dto/create-movie.dto';
 import { UpdateMovieDto } from 'src/movies/dto/update-movie.dto';
 import { MoviesService } from 'src/movies/movies.service';

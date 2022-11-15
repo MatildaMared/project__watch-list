@@ -1,24 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { CreateMovieDto } from 'src/movies/dto/create-movie.dto';
 import { UpdateMovieDto } from 'src/movies/dto/update-movie.dto';
-import { Movie } from 'src/movies/interfaces/movie.interface';
+import { Movie } from 'src/movies/entities/movie.interface';
+import { MovieRepository } from './movies.repository';
 
 @Injectable()
-export class MoviesService {
-  private movies: Movie[] = [
-    {
-      id: '1',
-      title: 'The Shawshank Redemption',
-      releaseYear: 1994,
-      genres: ['Drama'],
-    },
-    {
-      id: '2',
-      title: 'The Godfather',
-      releaseYear: 1972,
-      genres: ['Crime', 'Drama'],
-    },
-  ];
+export class MoviesService implements OnApplicationBootstrap {
+  movies: Movie[] = [];
 
   getAll(): Movie[] {
     return this.movies;
@@ -49,5 +37,9 @@ export class MoviesService {
     const updatedMovie = { ...movie, ...updateData };
     this.movies.push(updatedMovie);
     return updatedMovie;
+  }
+
+  onApplicationBootstrap() {
+    console.log('MoviesService initialized');
   }
 }
