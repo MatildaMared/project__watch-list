@@ -6,36 +6,54 @@ import { MovieRepository } from './movies.repository';
 
 @Injectable()
 export class MoviesService implements OnApplicationBootstrap {
-  movies: Movie[] = [];
+  constructor(private readonly movieRepository: MovieRepository) {}
 
-  getAll(): Movie[] {
-    return this.movies;
+  async getAll(): Promise<Movie[]> {
+    console.log('Inside service: get all movies');
+    return this.movieRepository.getAll();
   }
 
-  getOne(id: string): Movie {
-    return this.movies.find((movie) => movie.id === id);
+  async get(id: string): Promise<Movie> {
+    try {
+      console.log('Inside service: get one movie');
+      console.log('id = ', id);
+      const movie = await this.movieRepository.get(id);
+      console.log('movie = ', movie);
+      return movie;
+    } catch (error) {
+      console.log('There was an error');
+    }
   }
 
-  deleteOne(id: string): boolean {
-    this.movies.filter((movie) => movie.id !== id);
+  delete(id: string): boolean {
+    console.log('Inside service: delete movie');
+    // this.movies.filter((movie) => movie.id !== id);
     return true;
   }
 
   create(movieData: CreateMovieDto) {
+    console.log('Inside service: create movie');
     const newMovie = {
       id: Math.random().toString(),
       ...movieData,
     };
 
-    this.movies.push(newMovie);
+    // this.movies.push(newMovie);
     return newMovie;
   }
 
   update(id: string, updateData: UpdateMovieDto) {
-    const movie = this.getOne(id);
-    this.deleteOne(id);
-    const updatedMovie = { ...movie, ...updateData };
-    this.movies.push(updatedMovie);
+    console.log('Inside service: update movie');
+    // const movie = this.getOne(id);
+    // this.deleteOne(id);
+    const updatedMovie = {
+      id: '1',
+      releaseYear: 2021,
+      title: 'Test',
+      genres: [],
+      ...updateData,
+    };
+    // this.movies.push(updatedMovie);
     return updatedMovie;
   }
 
