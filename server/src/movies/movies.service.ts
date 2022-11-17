@@ -1,4 +1,8 @@
-import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  OnApplicationBootstrap,
+} from '@nestjs/common';
 import { CreateMovieDto } from 'src/movies/dto/create-movie.dto';
 import { UpdateMovieDto } from 'src/movies/dto/update-movie.dto';
 import { Movie } from 'src/movies/entities/movie.interface';
@@ -21,7 +25,7 @@ export class MoviesService implements OnApplicationBootstrap {
       console.log('movie = ', movie);
       return movie;
     } catch (error) {
-      console.log('There was an error');
+      throw new NotFoundException(`Movie with ID '${id}' not found`);
     }
   }
 

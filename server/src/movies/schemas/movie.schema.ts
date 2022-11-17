@@ -11,7 +11,13 @@ export class Movie {
   releaseYear: string;
 
   @Prop()
+  posterUrl?: string;
+
+  @Prop()
   genres?: string[];
+
+  @Prop()
+  streamingServices?: string[];
 }
 
 export const MovieSchema = SchemaFactory.createForClass(Movie);
