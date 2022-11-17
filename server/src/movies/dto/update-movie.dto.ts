@@ -1,5 +1,6 @@
 import {
   IsArray,
+  IsMongoId,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -7,7 +8,7 @@ import {
 } from 'class-validator';
 
 export class UpdateMovieDto {
-  @IsString()
+  @IsMongoId()
   @IsNotEmpty()
   _id: string;
 

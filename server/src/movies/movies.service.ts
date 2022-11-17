@@ -3,7 +3,6 @@ import {
   NotFoundException,
   OnApplicationBootstrap,
 } from '@nestjs/common';
-import { plainToClass } from 'class-transformer';
 import { CreateMovieDto } from 'src/movies/dto/create-movie.dto';
 import { UpdateMovieDto } from 'src/movies/dto/update-movie.dto';
 import { Movie } from 'src/movies/entities/movie.interface';
@@ -45,8 +44,6 @@ export class MoviesService implements OnApplicationBootstrap {
 
   update(id: string, updateData: UpdateMovieDto) {
     console.log('Inside service: update movie');
-    // const movie = this.getOne(id);
-    // this.deleteOne(id);
     const updatedMovie = {
       _id: '1',
       releaseYear: '2021',
@@ -54,7 +51,6 @@ export class MoviesService implements OnApplicationBootstrap {
       genres: [],
       ...updateData,
     };
-    // this.movies.push(updatedMovie);
     return updatedMovie;
   }
 

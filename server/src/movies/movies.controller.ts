@@ -11,6 +11,7 @@ import { Movie } from './entities/movie.interface';
 import { CreateMovieDto } from 'src/movies/dto/create-movie.dto';
 import { UpdateMovieDto } from 'src/movies/dto/update-movie.dto';
 import { MoviesService } from 'src/movies/movies.service';
+import { IdParams } from './params/id.params';
 
 @Controller('/api/movies')
 export class MoviesController {
@@ -25,8 +26,10 @@ export class MoviesController {
 
   // Get a single movie that belongs to a user
   @Get(':movieId')
-  async get(@Param('movieId') movieId: string): Promise<Movie> {
-    return this.moviesService.get(movieId);
+  async get(@Param('movieId') { id }: IdParams): Promise<Movie> {
+    console.log('Hello');
+    console.log(id);
+    return this.moviesService.get(id);
   }
 
   // Creates a new movie
@@ -40,16 +43,16 @@ export class MoviesController {
   @Put(':movieId')
   async update(
     @Body() movieData: UpdateMovieDto,
-    @Param('movieId') movieId: string,
+    @Param('movieId') { id }: IdParams,
   ): Promise<Movie> {
     console.log('Inside controller: update movie');
-    return this.moviesService.update(movieId, movieData);
+    return this.moviesService.update(id, movieData);
   }
 
   // Delete a movie
   @Delete(':movieId')
-  async delete(@Param('movieId') movieId: string) {
+  async delete(@Param('movieId') { id }: IdParams) {
     console.log('Inside controller: delete movie');
-    return this.moviesService.delete(movieId);
+    return this.moviesService.delete(id);
   }
 }
