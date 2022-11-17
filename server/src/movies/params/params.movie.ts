@@ -1,7 +1,7 @@
 import { IsMongoId, IsNotEmpty } from 'class-validator';
 
-export class IdParams {
-  @IsMongoId()
+export class MovieParams {
   @IsNotEmpty()
+  @IsMongoId()
   id: string;
 }

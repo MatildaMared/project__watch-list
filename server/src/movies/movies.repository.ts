@@ -5,19 +5,12 @@ import { Movie as MovieModel } from './schemas/movie.schema';
 import { Movie } from './entities/movie.interface';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { IMovieRepository } from './abstracts/abstract.movie.repository';
-import { plainToClass } from 'class-transformer';
 
 export class MovieRepository implements IMovieRepository<Movie> {
   private _repository: Model<Movie>;
 
   constructor(@InjectModel(MovieModel.name) repository: Model<Movie>) {
     this._repository = repository;
-  }
-
-  getAll(): Promise<Movie[]> {
-    console.log('Inside repository: get all movies');
-    // return this._repository.find().populate(this._populateOnFind).exec();
-    return this._repository.find().exec();
   }
 
   get(id: any): Promise<Movie> {

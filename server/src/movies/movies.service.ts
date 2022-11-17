@@ -12,11 +12,6 @@ import { MovieRepository } from './movies.repository';
 export class MoviesService implements OnApplicationBootstrap {
   constructor(private readonly movieRepository: MovieRepository) {}
 
-  async getAll(): Promise<Movie[]> {
-    console.log('Inside service: get all movies');
-    return this.movieRepository.getAll();
-  }
-
   async get(id: string): Promise<Movie> {
     try {
       console.log('Inside service: get one movie');
