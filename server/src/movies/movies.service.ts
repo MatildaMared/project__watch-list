@@ -3,6 +3,7 @@ import {
   NotFoundException,
   OnApplicationBootstrap,
 } from '@nestjs/common';
+import { plainToClass } from 'class-transformer';
 import { CreateMovieDto } from 'src/movies/dto/create-movie.dto';
 import { UpdateMovieDto } from 'src/movies/dto/update-movie.dto';
 import { Movie } from 'src/movies/entities/movie.interface';
@@ -39,8 +40,6 @@ export class MoviesService implements OnApplicationBootstrap {
     console.log('Inside service: create movie');
     console.log('Movie data is: ', movieData);
     const newMovie = this.movieRepository.create(movieData);
-    console.log('new movie is: ', newMovie);
-
     return newMovie;
   }
 
@@ -49,7 +48,7 @@ export class MoviesService implements OnApplicationBootstrap {
     // const movie = this.getOne(id);
     // this.deleteOne(id);
     const updatedMovie = {
-      id: '1',
+      _id: '1',
       releaseYear: '2021',
       title: 'Test',
       genres: [],

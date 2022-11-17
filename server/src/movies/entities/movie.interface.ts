@@ -1,5 +1,5 @@
-export interface Movie {
-  id: string;
+export class Movie {
+  _id: string;
   title: string;
   releaseYear: string;
   genres?: string[];

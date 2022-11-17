@@ -5,6 +5,7 @@ import { Movie as MovieModel } from './schemas/movie.schema';
 import { Movie } from './entities/movie.interface';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { IMovieRepository } from './abstracts/abstract.movie.repository';
+import { plainToClass } from 'class-transformer';
 
 export class MovieRepository implements IMovieRepository<Movie> {
   private _repository: Model<Movie>;
@@ -24,9 +25,10 @@ export class MovieRepository implements IMovieRepository<Movie> {
     return this._repository.findById(id).exec();
   }
 
-  create(item: CreateMovieDto): Promise<Movie> {
+  async create(item: CreateMovieDto): Promise<Movie> {
     console.log('Inside repository: create movie');
-    return this._repository.create(item);
+    const newMovie = await this._repository.create(item);
+    return newMovie;
   }
 
   update(id: string, item: UpdateMovieDto): Promise<Movie> {

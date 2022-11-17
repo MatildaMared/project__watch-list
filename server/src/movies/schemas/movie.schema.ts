@@ -2,8 +2,15 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type MovieDocument = Movie & Document;
 
-@Schema()
+// Remove _id when returning a movie
+
+@Schema({
+  versionKey: false,
+})
 export class Movie {
+  @Prop()
+  id: string;
+
   @Prop()
   title: string;
 
