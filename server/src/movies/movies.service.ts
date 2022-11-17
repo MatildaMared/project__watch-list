@@ -37,12 +37,10 @@ export class MoviesService implements OnApplicationBootstrap {
 
   create(movieData: CreateMovieDto) {
     console.log('Inside service: create movie');
-    const newMovie = {
-      id: Math.random().toString(),
-      ...movieData,
-    };
+    console.log('Movie data is: ', movieData);
+    const newMovie = this.movieRepository.create(movieData);
+    console.log('new movie is: ', newMovie);
 
-    // this.movies.push(newMovie);
     return newMovie;
   }
 
@@ -52,7 +50,7 @@ export class MoviesService implements OnApplicationBootstrap {
     // this.deleteOne(id);
     const updatedMovie = {
       id: '1',
-      releaseYear: 2021,
+      releaseYear: '2021',
       title: 'Test',
       genres: [],
       ...updateData,

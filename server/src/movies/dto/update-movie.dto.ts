@@ -1,5 +1,7 @@
 export class UpdateMovieDto {
   title?: string;
-  releaseYear?: number;
+  releaseYear?: string;
   genres?: string[];
+  posterUrl?: string;
+  streamingServices?: string[];
 }

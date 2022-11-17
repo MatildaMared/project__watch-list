@@ -1,7 +1,7 @@
 export interface Movie {
   id: string;
   title: string;
-  releaseYear: number;
+  releaseYear: string;
   genres?: string[];
   posterUrl?: string;
   streamingServices?: string[];
